@@ -3,11 +3,11 @@ var subscription;
 var stompClient;
 
 $(document).ready(function() {
-	connect();
 	registerSearch();
 });
 
 function registerSearch() {
+	connect();
 	$("#search").submit(function(ev){
 		event.preventDefault();
 		unsubscribe();
@@ -33,7 +33,7 @@ function unsubscribe(){
 	// Remove old tweets
 	$('#resultsBlock').children("div").remove();
 	if(subscription != undefined){
-		// Unsubscribe previous subscription
+		// Unsubscribes previous subscription
 		subscription.unsubscribe();
 	}
 }
@@ -52,8 +52,8 @@ function subscribe(query){
 		$('#resultsBlock').prepend(rendered);
 
 		// Removes the last tweet if there are more than totalTweets
-		if($('#resultsBlock')[0].children.length > totalTweets){
-			$('#resultsBlock')[0].children[(totalTweets-1)].remove();
+		if($('#resultsBlock').children().length > totalTweets){
+			$('#resultsBlock').children()[(totalTweets-1)].remove();
 		}
 	}, { id: query });
 }
